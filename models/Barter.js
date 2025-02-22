@@ -17,7 +17,7 @@ const barterSchema = new mongoose.Schema({
         required: true
      },
     willingToExchange: { 
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Product', 
         required: true 
     },
@@ -29,8 +29,7 @@ const barterSchema = new mongoose.Schema({
 
     message: {
         type: String,
-        required: true,
-        minlength: 3,
+        required: false,
         trim: true
     },
 });

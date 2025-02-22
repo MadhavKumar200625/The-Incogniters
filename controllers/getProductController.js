@@ -14,10 +14,16 @@ const getProductDetails = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(200).json({ product });
+    // Convert tradeOptions array into a comma-separated string
+    const formattedProduct = {
+      ...product._doc, // Retain other properties
+      tradeOptions: product.tradeOptions.join(", "), // Convert array to string
+    };
+
+    res.status(200).json(formattedProduct);
   } catch (error) {
     console.error(error);
-    res.status(500).json({  message: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

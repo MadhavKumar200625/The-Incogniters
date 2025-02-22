@@ -7,6 +7,7 @@ import homePageRoutes from './routes/homepageRoutes.js';
 import singleProductRoutes from './routes/singleProductRoutes.js';
 import userProductsRoutes from "./routes/userProductsRoutes.js"; 
 import barterRoutes from "./routes/barterRoute.js";
+import searchRoutes from "./routes/searchRoutes.js";
 
 
 
@@ -25,6 +26,7 @@ app.use("/api/homepage", homePageRoutes);
 app.use("/api/products", singleProductRoutes);
 app.use("/api/user", userProductsRoutes); 
 app.use("/api/barter", barterRoutes);
+app.use("/api/products", searchRoutes);
 
 const PORT = process.env.PORT || 5000; 
 

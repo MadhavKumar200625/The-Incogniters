@@ -1,29 +1,38 @@
-import fuse from fuse.js
+import Fuse from "fuse.js";
 import Product from "../models/Product.js";
 
 const getProducts = async (req, res) => {
   try {
     const { search } = req.query;
-    if (!search) {
-      return res.status(400).json({ error: 'Search query is required' });
-    }
 
+    // Fetch all products from the database
     const products = await Product.find();
 
+    // Convert tradeOptions array into a string
+    const formattedProducts = products.map((product) => ({
+      ...product._doc,
+      tradeOptions: product.tradeOptions.join(", "), // Convert array to string
+    }));
+
+    // If no search term is provided, return all products
+    if (!search) {
+      return res.status(200).json({ products: formattedProducts });
+    }
+
+    // Fuzzy search configuration
     const options = {
-      keys: [
-        { name: 'name', weight: 0.7 }, 
-        { name: 'category', weight: 0.3 }, 
-      ],
-      threshold: 0.3, 
+      keys: ["name", "category"], // Directly reference keys
+      threshold: 0.3, // Matching sensitivity
+      includeScore: true, // Helps filter results better
     };
 
-    const fuse = new Fuse(products, options);
-    const result = fuse.search(search).map(item => item.item); 
+    const fuse = new Fuse(formattedProducts, options);
+    const result = fuse.search(search).map((item) => item.item); // Extract only matched products
 
-    res.json({ success: true, products: result });
+    res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching products:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

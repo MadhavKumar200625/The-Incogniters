@@ -1,10 +1,12 @@
 import express from "express";
-import { initializeBarter, updateBarterStatus } from "../controllers/barterController.js";
+import { initializeBarter, updateBarterStatus, getAllBarterRequests } from "../controllers/barterController.js";
 
 const router = express.Router();
 
-router.post("/initialize", initializeBarter);
+router.get("/initialize", initializeBarter);
 
 router.patch("/update", updateBarterStatus);
+
+router.get("/get", getAllBarterRequests);
 
 export default router;
