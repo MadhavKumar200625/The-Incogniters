@@ -2,23 +2,30 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/userRoute.js';
+import productRoutes from './routes/productRoutes.js';
+import homePageRoutes from './routes/homepageRoutes.js'; 
+import singleProductRoutes from './routes/singleProductRoutes.js';
+import userProductsRoutes from "./routes/userProductsRoutes.js"; 
+import barterRoutes from "./routes/barterRoute.js";
+
+
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); 
 
-
 mongoose.connect(process.env.MONGO_URI, {
-
 }).then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error:', err));
 
-import productRoutes from './routes/productRoutes.js';
 app.use('/api/products', productRoutes);
+app.use("/api/user", userRouter);
+app.use("/api/homepage", homePageRoutes); 
+app.use("/api/products", singleProductRoutes);
+app.use("/api/user", userProductsRoutes); 
+app.use("/api/barter", barterRoutes);
 
-app.use("/api/user" , userRouter)
+const PORT = process.env.PORT || 5000; 
 
-const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
