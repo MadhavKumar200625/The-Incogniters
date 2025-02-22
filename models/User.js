@@ -12,24 +12,9 @@ const userSchema = new mongoose.Schema({
       unique: true,
       match: [/^\d{10}$/, 'Invalid phone number']
     },
-    phoneVerified: {
-      type: Boolean,
-      default: false
-    },
-    aadhaarNumber: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [/^\d{12}$/, 'Invalid Aadhaar number']
-    },
-    aadhaarVerified: {
-      type: Boolean,
-      default: false
-    },
     pincode: {
-      type: String,
+      type: Number,
       required: true,
-      match: [/^\d{6}$/, 'Invalid pincode']
     },
     averageRating: {
       type: Number,
