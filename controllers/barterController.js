@@ -13,28 +13,25 @@ const initializeBarter = async (req, res) => {
       return res.status(400).json({ message: "Seller product and buyer phone number are required." });
     }
 
-    // Find the requested product
     const requestedProduct = await Product.findById({_id:sellerProductId});
 
     if (!requestedProduct) {
       return res.status(404).json({ message: "Requested product not found." });
     }
 
-    // Find the buyer using phone number
     const buyer = await User.findOne({ phoneNumber: buyerPhone });
 
     if (!buyer) {
       return res.status(404).json({ message: "Buyer not found." });
     }
 
-    // Creating barter request
     const barterRequest = new Barter({
-      seller: requestedProduct.owner, // Owner of the requested product
-      sellerProduct: requestedProduct._id, // The actual product ID from name lookup
-      buyer: buyer._id, // Get buyer ID from phone number lookup
+      seller: requestedProduct.owner, 
+      sellerProduct: requestedProduct._id, 
+      buyer: buyer._id, 
       willingToExchange,
       status: "Pending",
-      message: "" // Initially empty
+      message: ""
     });
 
     await barterRequest.save();
@@ -44,7 +41,6 @@ const initializeBarter = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
-// Update Barter Status
 const updateBarterStatus = async (req, res) => {
   try {
     console.log("Request Body:", req.body);
@@ -74,7 +70,6 @@ const updateBarterStatus = async (req, res) => {
   }
 };
 
-// Get All Barter Requests
 const getAllBarterRequests = async (req, res) => {
   try {
     const barters = await Barter.find({ status: { $ne: "Accepted" } }).populate("sellerProduct");

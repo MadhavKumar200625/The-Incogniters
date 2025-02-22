@@ -14,10 +14,9 @@ const getProductDetails = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Convert tradeOptions array into a comma-separated string
     const formattedProduct = {
-      ...product._doc, // Retain other properties
-      tradeOptions: product.tradeOptions.join(", "), // Convert array to string
+      ...product._doc, 
+      tradeOptions: product.tradeOptions.join(", "), 
     };
 
     res.status(200).json(formattedProduct);

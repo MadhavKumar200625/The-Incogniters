@@ -3,6 +3,6 @@ import { getProducts } from "../controllers/searchController.js";
 
 const router = express.Router();
 
-router.get("/search", getProducts); // GET /api/products/search?search=your_query
+router.get("/search", getProducts); 
 
 export default router;

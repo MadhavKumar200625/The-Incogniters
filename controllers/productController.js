@@ -1,6 +1,5 @@
 import Product from "../models/Product.js";
 
-// Add a new product
 const addProduct = async (req, res) => {
   try {
     const { name, image, description, category, owner, tradeOptions, location } = req.body;
@@ -26,7 +25,6 @@ const addProduct = async (req, res) => {
   }
 };
 
-// View all products
 const viewAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
