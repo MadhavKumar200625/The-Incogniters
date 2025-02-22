@@ -1,7 +1,7 @@
-import User from "../models/user";
-import Product from "../models/Product";
+import User from "../models/User.js";
+import Product from "../models/Product.js";
 
-exports.getHomepage = async (req, res) => {
+const getHomepage = async (req, res) => {
   try {
     const topUsers = await User.find().sort({ reviewCount: -1 }).limit(5);
     const topUserIds = topUsers.map(user => user._id);
@@ -30,3 +30,4 @@ exports.getHomepage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+export{getHomepage}

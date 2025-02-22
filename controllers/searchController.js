@@ -1,7 +1,7 @@
-import fuse from (fuse.js)
-import Product from "../models/Product";
+import fuse from fuse.js
+import Product from "../models/Product.js";
 
-exports.getProducts = async (req, res) => {
+const getProducts = async (req, res) => {
   try {
     const { search } = req.query;
     if (!search) {
@@ -26,3 +26,5 @@ exports.getProducts = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export { getProducts };
