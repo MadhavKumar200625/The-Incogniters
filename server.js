@@ -13,6 +13,7 @@ import searchRoutes from "./routes/searchRoutes.js";
 
 dotenv.config();
 
+
 const app = express();
 app.use(express.json()); 
 
@@ -27,7 +28,9 @@ app.use("/api/products", singleProductRoutes);
 app.use("/api/user", userProductsRoutes); 
 app.use("/api/barter", barterRoutes);
 app.use("/api/products", searchRoutes);
-
+app.use("/",(req,res)=>{
+    res.json({"hello":"world"})
+    })
 const PORT = process.env.PORT || 5000; 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
