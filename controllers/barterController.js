@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 const initializeBarter = async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
+    console.log("Request Body:", req.query);
 
     const { sellerProductId, willingToExchange, buyerPhone } = req.query;
 
@@ -14,7 +14,7 @@ const initializeBarter = async (req, res) => {
     }
 
     // Find the requested product
-    const requestedProduct = await Product.findById(sellerProductId);
+    const requestedProduct = await Product.findById({_id:sellerProductId});
 
     if (!requestedProduct) {
       return res.status(404).json({ message: "Requested product not found." });
