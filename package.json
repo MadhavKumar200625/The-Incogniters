@@ -2,6 +2,7 @@
   "name": "the-incogniters",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,12 @@
     "url": "https://github.com/MadhavKumar200625/The-Incogniters/issues"
   },
   "homepage": "https://github.com/MadhavKumar200625/The-Incogniters#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fuse.js": "^7.1.0",
+    "mongoose": "^8.10.1",
+    "twilio": "^5.4.5"
+  }
 }
